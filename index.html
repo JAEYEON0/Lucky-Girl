@@ -11,7 +11,7 @@
             background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
             position: relative;
         }
-        /* 🍀 클로버 배경 효과 */
+        /* 🍀 클로버 배경 */
         .clover-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
         .clover { position: absolute; color: #4cad3a; font-size: 20px; animation: fall linear infinite; opacity: 0; }
         @keyframes fall {
@@ -20,7 +20,6 @@
             100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
 
-        /* 미니홈피 전체 틀 */
         .wrapper {
             z-index: 10; width: 85vw; max-width: 950px; height: 75vh;
             background-color: var(--point-green); border: 2px solid var(--border-dark);
@@ -32,49 +31,45 @@
             border: 2px dashed #fff; border-radius: 15px; display: flex; padding: 25px; box-sizing: border-box;
         }
         
-        /* 왼쪽 패널 (꽉 찬 구성) */
+        /* 왼쪽 패널 */
         .left-panel { width: 230px; border-right: 1px solid #eee; padding-right: 20px; display: flex; flex-direction: column; align-items: center; }
         .today-count { font-size: 11px; text-align: center; margin-bottom: 12px; color: #555; width: 100%; }
         .profile-box { width: 100%; height: 200px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; background: #fff; }
         .profile-img { width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated; }
-        
         .decoration-box { width: 100%; height: 65px; margin-top: 15px; display: flex; justify-content: center; align-items: center; }
         .decoration-img { width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; }
-
         .luck-box { width: 100%; height: 120px; margin-top: 12px; border-radius: 8px; overflow: hidden; display: flex; justify-content: center; }
         .luck-img { width: 100%; height: 100%; object-fit: contain; }
         
         /* 메인 패널 */
         .main-panel { flex: 1; padding-left: 25px; display: flex; flex-direction: column; position: relative; }
         .main-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #d4edda; padding-bottom: 12px; margin-bottom: 25px; }
-        
-        /* 🎵 BGM 위젯 */
         .music-info { font-size: 11px; color: #4cad3a; display: none; align-items: center; gap: 8px; margin-right: 15px; }
-        .music-info b { color: #333; }
         .note-icon { display: inline-block; animation: note-bounce 1s infinite alternate; }
         @keyframes note-bounce { from { transform: translateY(0); } to { transform: translateY(-3px); } }
-
-        .bgm-btn {
-            background: #fff; border: 1px solid #4cad3a; color: #4cad3a;
-            padding: 6px 18px; border-radius: 20px; font-size: 11px; font-weight: bold; cursor: pointer;
-        }
+        .bgm-btn { background: #fff; border: 1px solid #4cad3a; color: #4cad3a; padding: 6px 18px; border-radius: 20px; font-size: 11px; font-weight: bold; cursor: pointer; }
         .bgm-btn.playing { background: #4cad3a; color: #fff; }
         
+        .content-box { flex: 1; background: #fff; border: 1px solid #f0f0f0; border-radius: 15px; padding: 20px; overflow-y: auto; display: none; }
+        .content-box.active { display: block; }
+
+        /* ✨ 홈 전용 위젯 스타일 */
+        .home-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px; }
+        .home-widget { background: #fbfbfb; border: 1px solid #eee; border-radius: 10px; padding: 15px; }
+        .widget-title { font-size: 12px; font-weight: bold; color: #4cad3a; margin-bottom: 10px; display: flex; align-items: center; gap: 5px; }
+        .lucky-list { list-style: none; padding: 0; margin: 0; font-size: 13px; line-height: 1.8; color: #555; }
+        .update-item { font-size: 12px; color: #777; margin-bottom: 8px; border-left: 3px solid var(--point-green); padding-left: 8px; }
+
         /* 📝 방명록 스타일 */
-        .content-box { flex: 1; background: #fff; border: 1px solid #f0f0f0; border-radius: 15px; padding: 20px; overflow-y: auto; }
         .guestbook-input-area { background: #f9f9f9; padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #eee; }
         .guestbook-input { width: 100%; height: 60px; border: 1px solid #ddd; border-radius: 5px; padding: 10px; box-sizing: border-box; resize: none; font-size: 13px; margin-bottom: 10px; }
         .guestbook-btn { background: #4cad3a; color: #fff; border: none; padding: 5px 15px; border-radius: 5px; font-size: 12px; cursor: pointer; float: right; }
-        
-        .guestbook-list { margin-top: 40px; clear: both; }
         .guestbook-item { border-bottom: 1px dashed #eee; padding: 15px 0; display: flex; gap: 15px; }
-        .guest-avatar { width: 40px; height: 40px; background: #eee; border-radius: 5px; flex-shrink: 0; }
-        .guest-text { font-size: 13px; color: #333; line-height: 1.6; }
-        .guest-info { font-size: 11px; color: #999; margin-bottom: 5px; }
+        .guest-avatar { width: 40px; height: 40px; border-radius: 5px; flex-shrink: 0; }
 
         /* 사이드 탭 */
         .menu-tabs { position: absolute; right: -67px; top: 60px; display: flex; flex-direction: column; gap: 4px; }
-        .tab { width: 65px; height: 35px; background: white; border: 2px solid var(--border-dark); border-left: none; border-radius: 0 8px 8px 0; font-size: 11px; font-weight: bold; display: flex; align-items: center; justify-content: center; color: #555; }
+        .tab { width: 65px; height: 35px; background: white; border: 2px solid var(--border-dark); border-left: none; border-radius: 0 8px 8px 0; font-size: 11px; font-weight: bold; display: flex; align-items: center; justify-content: center; color: #555; cursor: pointer; }
         .tab.active { background: var(--point-green); color: white; }
 
         #player { position: absolute; width: 0; height: 0; visibility: hidden; }
@@ -90,7 +85,7 @@
                 <div class="today-count">TODAY <span style="color:red">7</span> | TOTAL 777</div>
                 <div class="profile-box"><img src="0000.jpg" class="profile-img"></div>
                 <div class="decoration-box"><img src="14.webp" class="decoration-img"></div>
-                <div style="font-size: 12px; margin-top: 12px; padding: 12px; background: #f0fff0; border-radius: 10px; color: #555; line-height: 1.5; width: 100%; box-sizing: border-box;">
+                <div style="font-size: 12px; margin-top: 12px; padding: 12px; background: #f0fff0; border-radius: 10px; color: #555; width: 100%; box-sizing: border-box;">
                     <b>Lucky JAE-YEON</b><br>
                     "완벽한 딱 맞는 상상을 믿는거야" 🍀
                 </div>
@@ -108,33 +103,61 @@
                     </div>
                 </div>
                 
-                <div class="content-box">
-                    <div class="guestbook-input-area">
-                        <textarea class="guestbook-input" placeholder="재연님에게 방명록을 남겨보세요! 🍀"></textarea>
-                        <button class="guestbook-btn">확인</button>
+                <div id="home-content" class="content-box active">
+                    <h3 style="margin-top:0; color:#333;">Hello, JAE-YEON World! ✨</h3>
+                    
+                    <div class="home-grid">
+                        <div class="home-widget">
+                            <div class="widget-title">🔮 Today's Lucky</div>
+                            <ul class="lucky-list">
+                                <li>🎨 행운의 색: <b>파스텔 그린</b></li>
+                                <li>🍙 행운의 간식: <b>주먹밥</b></li>
+                                <li>⭐ 행운 지수: <b>100% (매우 럭키!)</b></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="home-widget">
+                            <div class="widget-title">📢 Mini Log</div>
+                            <div class="update-item">방명록 탭 기능 업데이트 완료</div>
+                            <div class="update-item">BGM 플레이어 제목 노출 추가</div>
+                            <div class="update-item">홈 위젯 레이아웃 보강</div>
+                        </div>
                     </div>
 
-                    <div class="guestbook-list">
+                    <div style="margin-top: 25px; padding: 20px; border: 1px dashed #ddd; border-radius: 10px; text-align: center;">
+                        <p style="font-size: 13px; color: #888; line-height: 1.8;">
+                            "완벽한 딱 맞는 상상을 믿는거야"<br>
+                            재연님의 공간이 점점 예쁘게 채워지고 있어요! Ꮚ˃̶͈ ꈊ ˂̶͈Ꮚ 🍀
+                        </p>
+                    </div>
+                </div>
+
+                <div id="guest-content" class="content-box">
+                    <div class="guestbook-input-area">
+                        <textarea class="guestbook-input" placeholder="방명록을 남겨보세요! 🍀"></textarea>
+                        <button class="guestbook-btn">확인</button>
+                    </div>
+                    <div class="guestbook-list" style="clear:both;">
                         <div class="guestbook-item">
                             <div class="guest-avatar" style="background: #ffd1dc;"></div>
                             <div>
-                                <div class="guest-info">No. 2 <b>럭키보이</b> (2026.04.02)</div>
-                                <div class="guest-text">재연님! 홈페이지가 너무 귀여워요! 행운 부적 기운 받아갑니다~ Ꮚ˃̶͈ ꈊ ˂̶͈Ꮚ</div>
+                                <div style="font-size: 11px; color: #999; margin-bottom: 5px;">No. 2 <b>럭키보이</b> (2026.04.02)</div>
+                                <div style="font-size: 13px; color: #333;">재연님! 홈페이지가 너무 귀여워요! 행운 부적 기운 받아갑니다~ Ꮚ˃̶͈ ꈊ ˂̶͈Ꮚ</div>
                             </div>
                         </div>
                         <div class="guestbook-item">
                             <div class="guest-avatar" style="background: #d1eaff;"></div>
                             <div>
-                                <div class="guest-info">No. 1 <b>관리자</b> (2026.04.02)</div>
-                                <div class="guest-text">Welcome to Lucky JAE-YEON World! 🍀<br>자유롭게 방명록을 남겨주세요.</div>
+                                <div style="font-size: 11px; color: #999; margin-bottom: 5px;">No. 1 <b>관리자</b> (2026.04.02)</div>
+                                <div style="font-size: 13px; color: #333;">Welcome to Lucky JAE-YEON World! 🍀<br>자유롭게 방명록을 남겨주세요.</div>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <nav class="menu-tabs">
-                    <div class="tab">홈</div>
-                    <div class="tab">사진첩</div>
-                    <div class="tab active">방명록</div>
+                    <div class="tab active" onclick="showTab('home')">홈</div>
+                    <div class="tab" onclick="showTab('guest')">방명록</div>
                 </nav>
             </main>
         </div>
@@ -142,13 +165,28 @@
 
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
+        function showTab(tabName) {
+            document.getElementById('home-content').classList.remove('active');
+            document.getElementById('guest-content').classList.remove('active');
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(t => t.classList.remove('active'));
+
+            if (tabName === 'home') {
+                document.getElementById('home-content').classList.add('active');
+                tabs[0].classList.add('active');
+            } else {
+                document.getElementById('guest-content').classList.add('active');
+                tabs[1].classList.add('active');
+            }
+        }
+
         let player;
         let isPlaying = false;
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
                 height: '0', width: '0', videoId: 'UCmgGZbfjmk',
                 playerVars: { 'autoplay': 0, 'controls': 0, 'mute': 1 },
-                events: { 'onReady': () => console.log("Player Ready") }
+                events: { 'onReady': () => console.log("Ready") }
             });
         }
         function toggleMusic() {
