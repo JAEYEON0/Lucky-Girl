@@ -33,16 +33,12 @@
         .profile-img { width: 100%; height: 100%; object-fit: cover; }
         .main-panel { flex: 1; padding-left: 25px; display: flex; flex-direction: column; position: relative; }
         .main-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #d4edda; padding-bottom: 12px; margin-bottom: 25px; }
-        
-        /* 🎵 뮤직 버튼 디자인 보강 */
         .bgm-btn {
             background: #fff; border: 1px solid #4cad3a; color: #4cad3a;
             padding: 6px 18px; border-radius: 20px; font-size: 11px; font-weight: bold; cursor: pointer;
             box-shadow: 2px 2px 0px rgba(0,0,0,0.05); transition: 0.2s;
         }
-        .bgm-btn:active { transform: translate(1px, 1px); box-shadow: none; }
         .bgm-btn.playing { background: #4cad3a; color: #fff; }
-
         .content-box { flex: 1; background: #fff; border: 1px solid #f0f0f0; border-radius: 15px; padding: 30px; }
         .menu-tabs { position: absolute; right: -67px; top: 60px; display: flex; flex-direction: column; gap: 4px; }
         .tab { 
@@ -51,7 +47,9 @@
             display: flex; align-items: center; justify-content: center; cursor: pointer; color: #555;
         }
         .tab.active { background: var(--point-green); color: white; }
-        #player { position: absolute; width: 0; height: 0; visibility: hidden; }
+        
+        /* 유튜브 플레이어를 화면 밖으로 완전히 밀어버림 */
+        #player { position: absolute; left: -9999px; }
     </style>
 </head>
 <body>
@@ -67,23 +65,23 @@
                 </div>
                 <div style="font-size: 12px; margin-top: 20px; padding: 15px; background: #f4fff4; border-radius: 10px; color: #555;">
                     <b>Lucky JAE-YEON</b><br>
-                    재생 오류 수정 완료!<br>
-                    이제 버튼만 누르세요 🍀
+                    노래가 즉시 나옵니다!<br>
+                    디자인도 다시 완벽 복구 🍀
                 </div>
             </aside>
 
             <main class="main-panel">
                 <div class="main-header">
                     <span style="font-size: 18px; font-weight: 800; color: #4cad3a;">Lucky JAE-YEON World</span>
-                    <button id="music-btn" class="bgm-btn" onclick="toggleMusic()">▶ MUSIC START</button>
+                    <button id="music-btn" class="bgm-btn" onclick="startEverything()">▶ MUSIC START</button>
                 </div>
                 <div class="content-box">
                     <h3 style="margin-top:0;">Today's BGM 🎵</h3>
                     <p style="color: #666; font-size: 14px;">
                         "완벽한 딱 맞는 상상을 믿는거야"<br><br>
-                        노란 창이 뜨는 문제를 해결했어요! <br>
-                        주소로 접속한 뒤, 잠시(1~2초)만 기다렸다가 <br>
-                        상단의 <b>▶ MUSIC START</b>를 눌러보세요.
+                        이제 <b>▶ MUSIC START</b> 버튼만 누르면 <br>
+                        다른 확인 창 없이 노래가 바로 시작돼요! <br>
+                        유저님만의 럭키한 공간을 즐겨보세요 Ꮚ˃̶͈ ꈊ ˂̶͈Ꮚ
                     </p>
                 </div>
                 <nav class="menu-tabs">
@@ -99,23 +97,25 @@
     <script>
         let player;
         let isPlaying = false;
-        let isApiReady = false;
 
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
-                height: '0', width: '0', videoId: 'UCmgGZbfjmk',
-                playerVars: { 'autoplay': 0, 'controls': 0, 'mute': 1, 'enablejsapi': 1 },
-                events: { 'onReady': () => { isApiReady = true; console.log("API Ready!"); } }
+                height: '360', width: '640', videoId: 'UCmgGZbfjmk',
+                playerVars: { 
+                    'autoplay': 1, 'controls': 0, 'mute': 1, // 초기엔 무조건 뮤트
+                    'enablejsapi': 1, 'origin': window.location.origin 
+                },
+                events: { 'onReady': (e) => e.target.playVideo() }
             });
         }
 
-        function toggleMusic() {
-            if (!isApiReady) return; // API 로딩 전 클릭 방지
+        // 💡 버튼 하나로 음소거 해제와 재생을 동시에!
+        function startEverything() {
             const btn = document.getElementById('music-btn');
-            
             if (!isPlaying) {
-                player.unMute(); // 음소거 먼저 풀고
-                player.playVideo(); // 재생
+                player.unMute(); // 음소거 해제
+                player.setVolume(50); // 볼륨 설정
+                player.playVideo(); // 재생 시작
                 btn.innerText = "♪ NOW PLAYING";
                 btn.classList.add('playing');
                 isPlaying = true;
