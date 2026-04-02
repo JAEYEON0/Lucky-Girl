@@ -11,7 +11,7 @@
             background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
             position: relative;
         }
-        /* 🍀 클로버 배경 애니메이션 */
+        /* 🍀 클로버 배경 효과 */
         .clover-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
         .clover { position: absolute; color: #4cad3a; font-size: 20px; animation: fall linear infinite; opacity: 0; }
         @keyframes fall {
@@ -20,7 +20,7 @@
             100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
 
-        /* 미니홈피 틀 */
+        /* 미니홈피 전체 틀 */
         .wrapper {
             z-index: 10; width: 85vw; max-width: 950px; height: 75vh;
             background-color: var(--point-green); border: 2px solid var(--border-dark);
@@ -38,18 +38,17 @@
         .profile-box { width: 100%; height: 200px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; background: #fff; }
         .profile-img { width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated; }
         
-        /* 🍙 주먹밥 도트 구역 */
         .decoration-box { width: 100%; height: 65px; margin-top: 15px; display: flex; justify-content: center; align-items: center; }
         .decoration-img { width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; }
 
-        /* 🧧 행운 부적 구역 */
         .luck-box { width: 100%; height: 120px; margin-top: 12px; border-radius: 8px; overflow: hidden; display: flex; justify-content: center; }
         .luck-img { width: 100%; height: 100%; object-fit: contain; }
         
+        /* 메인 패널 */
         .main-panel { flex: 1; padding-left: 25px; display: flex; flex-direction: column; position: relative; }
         .main-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #d4edda; padding-bottom: 12px; margin-bottom: 25px; }
         
-        /* 🎵 BGM 위젯 스타일 (5번 추가 사항) */
+        /* 🎵 BGM 위젯 */
         .music-info { font-size: 11px; color: #4cad3a; display: none; align-items: center; gap: 8px; margin-right: 15px; }
         .music-info b { color: #333; }
         .note-icon { display: inline-block; animation: note-bounce 1s infinite alternate; }
@@ -61,15 +60,21 @@
         }
         .bgm-btn.playing { background: #4cad3a; color: #fff; }
         
-        .content-box { flex: 1; background: #fff; border: 1px solid #f0f0f0; border-radius: 15px; padding: 30px; }
+        /* 📝 방명록 스타일 */
+        .content-box { flex: 1; background: #fff; border: 1px solid #f0f0f0; border-radius: 15px; padding: 20px; overflow-y: auto; }
+        .guestbook-input-area { background: #f9f9f9; padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #eee; }
+        .guestbook-input { width: 100%; height: 60px; border: 1px solid #ddd; border-radius: 5px; padding: 10px; box-sizing: border-box; resize: none; font-size: 13px; margin-bottom: 10px; }
+        .guestbook-btn { background: #4cad3a; color: #fff; border: none; padding: 5px 15px; border-radius: 5px; font-size: 12px; cursor: pointer; float: right; }
         
+        .guestbook-list { margin-top: 40px; clear: both; }
+        .guestbook-item { border-bottom: 1px dashed #eee; padding: 15px 0; display: flex; gap: 15px; }
+        .guest-avatar { width: 40px; height: 40px; background: #eee; border-radius: 5px; flex-shrink: 0; }
+        .guest-text { font-size: 13px; color: #333; line-height: 1.6; }
+        .guest-info { font-size: 11px; color: #999; margin-bottom: 5px; }
+
         /* 사이드 탭 */
         .menu-tabs { position: absolute; right: -67px; top: 60px; display: flex; flex-direction: column; gap: 4px; }
-        .tab { 
-            width: 65px; height: 35px; background: white; border: 2px solid var(--border-dark); 
-            border-left: none; border-radius: 0 8px 8px 0; font-size: 11px; font-weight: bold;
-            display: flex; align-items: center; justify-content: center; color: #555;
-        }
+        .tab { width: 65px; height: 35px; background: white; border: 2px solid var(--border-dark); border-left: none; border-radius: 0 8px 8px 0; font-size: 11px; font-weight: bold; display: flex; align-items: center; justify-content: center; color: #555; }
         .tab.active { background: var(--point-green); color: white; }
 
         #player { position: absolute; width: 0; height: 0; visibility: hidden; }
@@ -83,19 +88,13 @@
         <div class="container">
             <aside class="left-panel">
                 <div class="today-count">TODAY <span style="color:red">7</span> | TOTAL 777</div>
-                <div class="profile-box">
-                    <img src="0000.jpg" class="profile-img"> </div>
-                
-                <div class="decoration-box">
-                    <img src="14.webp" class="decoration-img"> </div>
-
+                <div class="profile-box"><img src="0000.jpg" class="profile-img"></div>
+                <div class="decoration-box"><img src="14.webp" class="decoration-img"></div>
                 <div style="font-size: 12px; margin-top: 12px; padding: 12px; background: #f0fff0; border-radius: 10px; color: #555; line-height: 1.5; width: 100%; box-sizing: border-box;">
                     <b>Lucky JAE-YEON</b><br>
                     "완벽한 딱 맞는 상상을 믿는거야" 🍀
                 </div>
-
-                <div class="luck-box">
-                    <img src="7890.jpg" class="luck-img"> </div>
+                <div class="luck-box"><img src="7890.jpg" class="luck-img"></div>
             </aside>
 
             <main class="main-panel">
@@ -103,25 +102,39 @@
                     <span style="font-size: 18px; font-weight: 800; color: #4cad3a;">Lucky JAE-YEON World</span>
                     <div style="display: flex; align-items: center;">
                         <div class="music-info" id="music-display">
-                            <span class="note-icon">♪</span> 
-                            <b>ILLIT - Lucky Girl</b>
+                            <span class="note-icon">♪</span> <b>ILLIT - Lucky Girl</b>
                         </div>
                         <button id="music-btn" class="bgm-btn" onclick="toggleMusic()">▶ MUSIC START</button>
                     </div>
                 </div>
+                
                 <div class="content-box">
-                    <h3 style="margin-top:0;">BGM Information 🎵</h3>
-                    <p style="color: #666; font-size: 14px; line-height: 2;">
-                        음악 재생 정보 위젯이 추가되었습니다! <br>
-                        왼쪽 패널도 주먹밥과 부적으로 꽉 채워졌어요. <br><br>
-                        상단 버튼을 누르면 노래 제목이 나타나며 <br>
-                        유저님만의 <b>럭키 미니홈피</b>가 완성됩니다! Ꮚ˃̶͈ ꈊ ˂̶͈Ꮚ
-                    </p>
+                    <div class="guestbook-input-area">
+                        <textarea class="guestbook-input" placeholder="재연님에게 방명록을 남겨보세요! 🍀"></textarea>
+                        <button class="guestbook-btn">확인</button>
+                    </div>
+
+                    <div class="guestbook-list">
+                        <div class="guestbook-item">
+                            <div class="guest-avatar" style="background: #ffd1dc;"></div>
+                            <div>
+                                <div class="guest-info">No. 2 <b>럭키보이</b> (2026.04.02)</div>
+                                <div class="guest-text">재연님! 홈페이지가 너무 귀여워요! 행운 부적 기운 받아갑니다~ Ꮚ˃̶͈ ꈊ ˂̶͈Ꮚ</div>
+                            </div>
+                        </div>
+                        <div class="guestbook-item">
+                            <div class="guest-avatar" style="background: #d1eaff;"></div>
+                            <div>
+                                <div class="guest-info">No. 1 <b>관리자</b> (2026.04.02)</div>
+                                <div class="guest-text">Welcome to Lucky JAE-YEON World! 🍀<br>자유롭게 방명록을 남겨주세요.</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <nav class="menu-tabs">
-                    <div class="tab active">홈</div>
+                    <div class="tab">홈</div>
                     <div class="tab">사진첩</div>
-                    <div class="tab">방명록</div>
+                    <div class="tab active">방명록</div>
                 </nav>
             </main>
         </div>
@@ -138,27 +151,21 @@
                 events: { 'onReady': () => console.log("Player Ready") }
             });
         }
-
-        // 음악 및 위젯 토글
         function toggleMusic() {
             const btn = document.getElementById('music-btn');
             const display = document.getElementById('music-display');
             if (!isPlaying) {
-                player.unMute();
-                player.playVideo();
-                btn.innerText = "STOP";
-                btn.classList.add('playing');
-                display.style.display = "flex"; // 제목 표시
+                player.unMute(); player.playVideo();
+                btn.innerText = "STOP"; btn.classList.add('playing');
+                display.style.display = "flex";
                 isPlaying = true;
             } else {
                 player.pauseVideo();
-                btn.innerText = "▶ MUSIC START";
-                btn.classList.remove('playing');
-                display.style.display = "none"; // 제목 숨김
+                btn.innerText = "▶ MUSIC START"; btn.classList.remove('playing');
+                display.style.display = "none";
                 isPlaying = false;
             }
         }
-
         const cloverBox = document.getElementById('clover-box');
         function createClover() {
             const clover = document.createElement('div');
