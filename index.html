@@ -127,4 +127,69 @@
                                 <div style="font-size: 13px; color: #333;">재연님! 홈페이지가 너무 귀여워요! 행운 부적 기운 받아갑니다~ Ꮚ˃̶͈ ꈊ ˂̶͈Ꮚ</div>
                             </div>
                         </div>
-                        <div class="guestbook
+                        <div class="guestbook-item">
+                            <div class="guest-avatar" style="background: #d1eaff;"></div>
+                            <div class="guest-msg-box">
+                                <div style="font-size: 11px; color: #999; margin-bottom: 5px;">No. 1 <b>관리자</b> (2026.04.02)</div>
+                                <div style="font-size: 13px; color: #333;">Welcome to Lucky JAE-YEON World! 🍀<br>자유롭게 방명록을 남겨주세요.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <nav class="menu-tabs">
+                    <div class="tab active" onclick="showTab('home')">홈</div>
+                    <div class="tab" onclick="showTab('guest')">방명록</div>
+                </nav>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        function showTab(tabName) {
+            document.getElementById('home-content').classList.remove('active');
+            document.getElementById('guest-content').classList.remove('active');
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(t => t.classList.remove('active'));
+            if (tabName === 'home') {
+                document.getElementById('home-content').classList.add('active');
+                tabs[0].classList.add('active');
+            } else {
+                document.getElementById('guest-content').classList.add('active');
+                tabs[1].classList.add('active');
+            }
+        }
+
+        let player, isPlaying = false;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '0', width: '0', videoId: 'UCmgGZbfjmk',
+                playerVars: { 'autoplay': 0, 'mute': 1 }
+            });
+        }
+        function toggleMusic() {
+            const btn = document.getElementById('music-btn');
+            const display = document.getElementById('music-display');
+            if (!isPlaying) {
+                player.unMute(); player.playVideo();
+                btn.innerText = "STOP"; btn.classList.add('playing');
+                display.style.display = "flex"; isPlaying = true;
+            } else {
+                player.pauseVideo();
+                btn.innerText = "▶ MUSIC START"; btn.classList.remove('playing');
+                display.style.display = "none"; isPlaying = false;
+            }
+        }
+
+        setInterval(() => {
+            const clover = document.createElement('div');
+            clover.className = 'clover'; clover.innerText = '🍀';
+            clover.style.left = Math.random() * 100 + 'vw';
+            clover.style.animationDuration = Math.random() * 3 + 5 + 's';
+            document.getElementById('clover-box').appendChild(clover);
+            setTimeout(() => clover.remove(), 8000);
+        }, 500);
+    </script>
+</body>
+</html>
