@@ -11,7 +11,7 @@
             background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
             position: relative;
         }
-        /* 🍀 클로버 배경 효과 */
+        /* 🍀 클로버 배경 애니메이션 */
         .clover-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
         .clover { position: absolute; color: #4cad3a; font-size: 20px; animation: fall linear infinite; opacity: 0; }
         @keyframes fall {
@@ -20,7 +20,7 @@
             100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
 
-        /* 미니홈피 전체 틀 */
+        /* 미니홈피 틀 */
         .wrapper {
             z-index: 10; width: 85vw; max-width: 950px; height: 75vh;
             background-color: var(--point-green); border: 2px solid var(--border-dark);
@@ -32,55 +32,38 @@
             border: 2px dashed #fff; border-radius: 15px; display: flex; padding: 25px; box-sizing: border-box;
         }
         
-        /* 왼쪽 영역: 주먹밥+부적으로 꽉 채우기 */
+        /* 왼쪽 패널 (꽉 찬 구성) */
         .left-panel { width: 230px; border-right: 1px solid #eee; padding-right: 20px; display: flex; flex-direction: column; align-items: center; }
-        .today-count { font-size: 11px; text-align: center; margin-bottom: 15px; color: #555; width: 100%; }
+        .today-count { font-size: 11px; text-align: center; margin-bottom: 12px; color: #555; width: 100%; }
         .profile-box { width: 100%; height: 200px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; background: #fff; }
         .profile-img { width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated; }
         
-        /* 🍙 주먹밥 이미지 (위치/크기 조정) */
-        .decoration-box {
-            width: 100%;
-            height: 70px; /* 높이를 늘려서 빈 구역을 꽉 채웁니다 */
-            margin-top: 20px; /* 프사 박스 아래 간격 */
-            display: flex; justify-content: center; align-items: center;
-            overflow: hidden;
-        }
-        .decoration-img {
-            width: 100%; height: 100%;
-            object-fit: contain; /* 이미지가 찌그러지지 않고 박스 안에 쏙 들어가게 함 */
-            image-rendering: pixelated; /* 도트 선명하게 */
-        }
-        
-        /* 🧧 행운부적 (하단 꽉 채우기) */
-        .luck-box {
-            width: 100%;
-            height: 120px; /* 높이를 꽉 차게 설정 */
-            margin-top: 15px; /* 한 줄란 글 아래 간격 */
-            border-radius: 8px; /* 스타일 보강 */
-            overflow: hidden;
-            display: flex; justify-content: center;
-        }
-        .luck-img {
-            width: 100%; height: 100%;
-            object-fit: contain; /* */
-        }
+        /* 🍙 주먹밥 도트 구역 */
+        .decoration-box { width: 100%; height: 65px; margin-top: 15px; display: flex; justify-content: center; align-items: center; }
+        .decoration-img { width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; }
+
+        /* 🧧 행운 부적 구역 */
+        .luck-box { width: 100%; height: 120px; margin-top: 12px; border-radius: 8px; overflow: hidden; display: flex; justify-content: center; }
+        .luck-img { width: 100%; height: 100%; object-fit: contain; }
         
         .main-panel { flex: 1; padding-left: 25px; display: flex; flex-direction: column; position: relative; }
         .main-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #d4edda; padding-bottom: 12px; margin-bottom: 25px; }
-        .site-title { font-size: 18px; font-weight: 800; color: #4cad3a; }
+        
+        /* 🎵 BGM 위젯 스타일 (5번 추가 사항) */
+        .music-info { font-size: 11px; color: #4cad3a; display: none; align-items: center; gap: 8px; margin-right: 15px; }
+        .music-info b { color: #333; }
+        .note-icon { display: inline-block; animation: note-bounce 1s infinite alternate; }
+        @keyframes note-bounce { from { transform: translateY(0); } to { transform: translateY(-3px); } }
 
-        /* 🎵 뮤직 버튼 (원클릭 재생 보강) */
         .bgm-btn {
             background: #fff; border: 1px solid #4cad3a; color: #4cad3a;
             padding: 6px 18px; border-radius: 20px; font-size: 11px; font-weight: bold; cursor: pointer;
-            transition: all 0.2s;
         }
         .bgm-btn.playing { background: #4cad3a; color: #fff; }
         
-        .content-box { flex: 1; background: #fff; border: 1px solid #f0f0f0; border-radius: 15px; padding: 30px; line-height: 1.8; }
+        .content-box { flex: 1; background: #fff; border: 1px solid #f0f0f0; border-radius: 15px; padding: 30px; }
         
-        /* 오른쪽 탭 */
+        /* 사이드 탭 */
         .menu-tabs { position: absolute; right: -67px; top: 60px; display: flex; flex-direction: column; gap: 4px; }
         .tab { 
             width: 65px; height: 35px; background: white; border: 2px solid var(--border-dark); 
@@ -104,33 +87,35 @@
                     <img src="0000.jpg" class="profile-img"> </div>
                 
                 <div class="decoration-box">
-                    <img src="14.webp" alt=" 주먹밥 데코" class="decoration-img">
-                </div>
+                    <img src="14.webp" class="decoration-img"> </div>
 
-                <div style="font-size: 12px; margin-top: 15px; padding: 15px; background: #f0fff0; border-radius: 10px; color: #555; width: 100%; box-sizing: border-box;">
+                <div style="font-size: 12px; margin-top: 12px; padding: 12px; background: #f0fff0; border-radius: 10px; color: #555; line-height: 1.5; width: 100%; box-sizing: border-box;">
                     <b>Lucky JAE-YEON</b><br>
-                    "완벽한 딱 맞는 상상을 믿는거야" 🍀<br><br>
-                    픽셀 감성 미니홈피 완료! ✨
+                    "완벽한 딱 맞는 상상을 믿는거야" 🍀
                 </div>
 
                 <div class="luck-box">
-                    <img src="7890.jpg" alt="행운부적" class="luck-img">
-                </div>
+                    <img src="7890.jpg" class="luck-img"> </div>
             </aside>
 
             <main class="main-panel">
                 <div class="main-header">
-                    <span class="site-title">Lucky JAE-YEON World</span>
-                    <button id="music-btn" class="bgm-btn" onclick="toggleMusic()">▶ MUSIC START</button>
+                    <span style="font-size: 18px; font-weight: 800; color: #4cad3a;">Lucky JAE-YEON World</span>
+                    <div style="display: flex; align-items: center;">
+                        <div class="music-info" id="music-display">
+                            <span class="note-icon">♪</span> 
+                            <b>ILLIT - Lucky Girl</b>
+                        </div>
+                        <button id="music-btn" class="bgm-btn" onclick="toggleMusic()">▶ MUSIC START</button>
+                    </div>
                 </div>
                 <div class="content-box">
-                    <h3 style="margin-top:0;">Today's BGM 🎵</h3>
-                    <p style="color: #666; font-size: 14px;">
-                        "완벽한 딱 맞는 상상을 믿는거야"<br><br>
-                        왼쪽 프로필 아래 빨간곳을 꽉 채웠어요!<br>
-                        주먹밥 도트와 행운 부적까지 다 들어갔습니다.<br>
-                        상단 <b>▶ MUSIC START</b> 버튼을 눌러보세요!<br>
-                        이제 한 번에 노래가 흘러나올 거예요! ♪
+                    <h3 style="margin-top:0;">BGM Information 🎵</h3>
+                    <p style="color: #666; font-size: 14px; line-height: 2;">
+                        음악 재생 정보 위젯이 추가되었습니다! <br>
+                        왼쪽 패널도 주먹밥과 부적으로 꽉 채워졌어요. <br><br>
+                        상단 버튼을 누르면 노래 제목이 나타나며 <br>
+                        유저님만의 <b>럭키 미니홈피</b>가 완성됩니다! Ꮚ˃̶͈ ꈊ ˂̶͈Ꮚ
                     </p>
                 </div>
                 <nav class="menu-tabs">
@@ -150,23 +135,26 @@
             player = new YT.Player('player', {
                 height: '0', width: '0', videoId: 'UCmgGZbfjmk',
                 playerVars: { 'autoplay': 0, 'controls': 0, 'mute': 1 },
-                events: { 'onReady': () => console.log("Music Ready!") }
+                events: { 'onReady': () => console.log("Player Ready") }
             });
         }
 
-        // 💡 버튼 하나로 음소거 해제와 재생을 동시에!
+        // 음악 및 위젯 토글
         function toggleMusic() {
             const btn = document.getElementById('music-btn');
+            const display = document.getElementById('music-display');
             if (!isPlaying) {
-                player.unMute(); // 음소거 풀고
-                player.playVideo(); // 재생 시작
-                btn.innerText = "♪ NOW PLAYING";
+                player.unMute();
+                player.playVideo();
+                btn.innerText = "STOP";
                 btn.classList.add('playing');
+                display.style.display = "flex"; // 제목 표시
                 isPlaying = true;
             } else {
                 player.pauseVideo();
                 btn.innerText = "▶ MUSIC START";
                 btn.classList.remove('playing');
+                display.style.display = "none"; // 제목 숨김
                 isPlaying = false;
             }
         }
