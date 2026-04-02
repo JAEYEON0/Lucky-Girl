@@ -11,8 +11,7 @@
             background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
             position: relative;
         }
-
-        /* 🍀 클로버 배경 효과 */
+        /* 🍀 클로버 효과 */
         .clover-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
         .clover { position: absolute; color: #4cad3a; font-size: 20px; animation: fall linear infinite; opacity: 0; }
         @keyframes fall {
@@ -20,51 +19,50 @@
             10% { opacity: 0.8; }
             100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
-
-        /* 미니홈피 외부 틀 (테두리 입체감 부여) */
+        /* 미니홈피 전체 틀 */
         .wrapper {
             z-index: 10; width: 85vw; max-width: 950px; height: 75vh;
             background-color: var(--point-green); border: 2px solid var(--border-dark);
             border-radius: 20px; padding: 15px; position: relative;
             box-shadow: 10px 10px 0px rgba(0,0,0,0.1); display: flex; justify-content: center; align-items: center;
         }
-
-        /* 내부 하얀 종이판 */
         .container {
-            width: 100%; height: 100%; background-color: white;
+            width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.95);
             border: 2px dashed #fff; border-radius: 15px; display: flex; padding: 25px; box-sizing: border-box;
         }
-
-        /* 왼쪽 패널 (TODAY / 프로필) */
         .left-panel { width: 230px; border-right: 1px solid #eee; padding-right: 20px; display: flex; flex-direction: column; }
-        .today-count { font-size: 11px; text-align: center; margin-bottom: 15px; color: #555; }
-        .profile-box { width: 100%; height: 200px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; background: #f8f8f8; }
-        .profile-img { width: 100%; height: 100%; object-fit: cover; }
         
-        /* 메인 패널 */
+        /* 📸 프로필 영역 설정 */
+        .profile-box { 
+            width: 100%; height: 230px; 
+            border: 1px solid #ddd; border-radius: 10px; 
+            overflow: hidden; background: #fff;
+            box-shadow: inset 0px 0px 5px rgba(0,0,0,0.05);
+        }
+        .profile-img { 
+            width: 100%; height: 100%; 
+            object-fit: cover; /* 프사가 박스에 꽉 차도록 설정 */
+            image-rendering: pixelated; /* 도트 이미지를 선명하게! */
+        }
+        
         .main-panel { flex: 1; padding-left: 25px; display: flex; flex-direction: column; position: relative; }
-        .main-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #d4edda; padding-bottom: 12px; margin-bottom: 25px; }
-        .site-title { font-size: 18px; font-weight: 800; color: #4cad3a; }
-
-        /* 뮤직 버튼 */
+        .main-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #d4edda; padding-bottom: 12px; margin-bottom: 20px; }
         .bgm-btn {
             background: #fff; border: 1px solid #4cad3a; color: #4cad3a;
-            padding: 6px 18px; border-radius: 20px; font-size: 11px; font-weight: bold; cursor: pointer;
-            transition: all 0.2s;
+            padding: 5px 15px; border-radius: 20px; font-size: 11px; font-weight: bold; cursor: pointer;
+            transition: all 0.3s;
         }
         .bgm-btn.playing { background: #4cad3a; color: #fff; }
-
-        .content-box { flex: 1; background: #fff; border: 1px solid #f0f0f0; border-radius: 15px; padding: 30px; }
-
-        /* ✨ 미니홈피의 핵심: 오른쪽 탭 메뉴 */
-        .menu-tabs { position: absolute; right: -67px; top: 60px; display: flex; flex-direction: column; gap: 4px; }
+        .content-box { flex: 1; background: #fff; border: 1px solid #f2f2f2; border-radius: 12px; padding: 25px; }
+        
+        /* 🏠 사이드 탭 */
+        .menu-tabs { position: absolute; right: -67px; top: 50px; display: flex; flex-direction: column; gap: 5px; }
         .tab { 
             width: 65px; height: 35px; background: white; border: 2px solid var(--border-dark); 
             border-left: none; border-radius: 0 8px 8px 0; font-size: 11px; font-weight: bold;
-            display: flex; align-items: center; justify-content: center; cursor: pointer;
-            color: #555; text-decoration: none;
+            display: flex; align-items: center; justify-content: center; color: #555;
         }
-        .tab.active { background: var(--point-green); color: white; }
+        .tab.active { background: var(--point-green); color: white; border-color: var(--border-dark); }
 
         #player { position: absolute; width: 0; height: 0; visibility: hidden; }
     </style>
@@ -76,32 +74,31 @@
     <div class="wrapper">
         <div class="container">
             <aside class="left-panel">
-                <div class="today-count">TODAY <span style="color:red">7</span> | TOTAL 777</div>
+                <div style="font-size: 11px; text-align: center; margin-bottom: 12px;">TODAY <span style="color:red">7</span> | TOTAL 777</div>
                 <div class="profile-box">
-                    <img src="https://images.unsplash.com/photo-1528183429752-a97d0bf99b5a?q=80&w=2070" class="profile-img">
+                    <img src="0000.jpg" class="profile-img">
                 </div>
-                <div style="font-size: 12px; margin-top: 20px; padding: 15px; background: #f4fff4; border-radius: 10px; color: #555; line-height: 1.6;">
+                <div style="font-size: 12px; margin-top: 20px; padding: 15px; background: #f0fff0; border-radius: 8px; color: #555; line-height: 1.6;">
                     <b>Lucky JAE-YEON</b><br>
                     "완벽한 딱 맞는 상상을 믿는거야" 🍀<br><br>
-                    스타일 복구 완료! ✨
+                    픽셀 감성 미니홈피<br>배포 준비 완료! ✨
                 </div>
             </aside>
 
             <main class="main-panel">
                 <div class="main-header">
-                    <span class="site-title">Lucky JAE-YEON World</span>
+                    <span style="font-size: 16px; font-weight: 800; color: #4cad3a;">Lucky JAE-YEON World</span>
                     <button id="music-btn" class="bgm-btn" onclick="toggleMusic()">▶ MUSIC START</button>
                 </div>
                 <div class="content-box">
-                    <h3 style="margin-top:0;">Today's BGM 🎵</h3>
-                    <p style="color: #666; font-size: 14px; line-height: 1.8;">
-                        ILLIT - Lucky Girl Syndrome<br><br>
-                        레이아웃을 미니홈피 스타일로 다시 잡았어요!<br>
-                        이제 오른쪽의 탭 메뉴와 함께<br>
-                        진짜 내 미니홈피 같은 느낌을 즐겨보세요 Ꮚ˃̶͈ ꈊ ˂̶͈Ꮚ
+                    <h3 style="color: #333; margin-top: 0;">Welcome Back! Ꮚ˃̶͈ ꈊ ˂̶͈Ꮚ</h3>
+                    <p style="font-size: 13px; color: #666; line-height: 1.8;">
+                        레이아웃과 프사가 모두 합쳐졌어요! <br>
+                        이제 깃허브에 올리면 전 세계 어디서든 <br>
+                        유저님의 예쁜 미니홈피를 볼 수 있습니다. <br><br>
+                        상단 <b>▶ MUSIC START</b> 버튼을 눌러보세요!
                     </p>
                 </div>
-
                 <nav class="menu-tabs">
                     <div class="tab active">홈</div>
                     <div class="tab">사진첩</div>
@@ -119,7 +116,7 @@
             player = new YT.Player('player', {
                 height: '0', width: '0', videoId: 'UCmgGZbfjmk',
                 playerVars: { 'autoplay': 0, 'controls': 0, 'mute': 1 },
-                events: { 'onReady': () => console.log("Player Ready!") }
+                events: { 'onReady': () => console.log("Music Ready!") }
             });
         }
         function toggleMusic() {
