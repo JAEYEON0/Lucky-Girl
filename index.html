@@ -11,6 +11,7 @@
             background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
             position: relative;
         }
+        /* 🍀 클로버 효과 */
         .clover-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
         .clover { position: absolute; color: #4cad3a; font-size: 20px; animation: fall linear infinite; opacity: 0; }
         @keyframes fall {
@@ -18,38 +19,32 @@
             10% { opacity: 0.8; }
             100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
+        /* 미니홈피 전체 틀 */
         .wrapper {
-            z-index: 10; width: 85vw; max-width: 950px; height: 75vh;
+            z-index: 10; width: 80vw; max-width: 950px; height: 70vh;
             background-color: var(--point-green); border: 2px solid var(--border-dark);
             border-radius: 20px; padding: 15px; position: relative;
             box-shadow: 10px 10px 0px rgba(0,0,0,0.1); display: flex; justify-content: center; align-items: center;
         }
         .container {
-            width: 100%; height: 100%; background-color: white;
-            border: 2px dashed #fff; border-radius: 15px; display: flex; padding: 25px; box-sizing: border-box;
+            width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.95);
+            border: 2px dashed #fff; border-radius: 15px; display: flex; padding: 20px; box-sizing: border-box;
         }
-        .left-panel { width: 230px; border-right: 1px solid #eee; padding-right: 20px; display: flex; flex-direction: column; }
-        .profile-box { width: 100%; height: 200px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; background: #f8f8f8; }
+        .left-panel { width: 220px; border-right: 1px solid #eee; padding-right: 15px; display: flex; flex-direction: column; }
+        .profile-box { width: 100%; height: 180px; border: 1px solid #ddd; border-radius: 10px; overflow: hidden; background: #eee; }
         .profile-img { width: 100%; height: 100%; object-fit: cover; }
-        .main-panel { flex: 1; padding-left: 25px; display: flex; flex-direction: column; position: relative; }
-        .main-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #d4edda; padding-bottom: 12px; margin-bottom: 25px; }
+        .main-panel { flex: 1; padding-left: 20px; display: flex; flex-direction: column; position: relative; }
+        .main-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #d4edda; padding-bottom: 10px; margin-bottom: 20px; }
+        
+        /* BGM 버튼 디자인 */
         .bgm-btn {
             background: #fff; border: 1px solid #4cad3a; color: #4cad3a;
-            padding: 6px 18px; border-radius: 20px; font-size: 11px; font-weight: bold; cursor: pointer;
-            box-shadow: 2px 2px 0px rgba(0,0,0,0.05); transition: 0.2s;
+            padding: 5px 15px; border-radius: 20px; font-size: 11px; font-weight: bold; cursor: pointer;
+            transition: all 0.3s;
         }
         .bgm-btn.playing { background: #4cad3a; color: #fff; }
-        .content-box { flex: 1; background: #fff; border: 1px solid #f0f0f0; border-radius: 15px; padding: 30px; }
-        .menu-tabs { position: absolute; right: -67px; top: 60px; display: flex; flex-direction: column; gap: 4px; }
-        .tab { 
-            width: 65px; height: 35px; background: white; border: 2px solid var(--border-dark); 
-            border-left: none; border-radius: 0 8px 8px 0; font-size: 11px; font-weight: bold;
-            display: flex; align-items: center; justify-content: center; cursor: pointer; color: #555;
-        }
-        .tab.active { background: var(--point-green); color: white; }
-        
-        /* 유튜브 플레이어를 화면 밖으로 완전히 밀어버림 */
-        #player { position: absolute; left: -9999px; }
+        .content-box { flex: 1; background: #fff; border: 1px solid #f2f2f2; border-radius: 12px; padding: 25px; }
+        #player { position: absolute; width: 0; height: 0; visibility: hidden; }
     </style>
 </head>
 <body>
@@ -59,36 +54,28 @@
     <div class="wrapper">
         <div class="container">
             <aside class="left-panel">
-                <div style="font-size: 11px; text-align: center; margin-bottom: 15px;">TODAY <span style="color:red">7</span> | TOTAL 777</div>
+                <div style="font-size: 11px; text-align: center; margin-bottom: 12px;">TODAY <span style="color:red">7</span> | TOTAL 777</div>
                 <div class="profile-box">
                     <img src="https://images.unsplash.com/photo-1528183429752-a97d0bf99b5a?q=80&w=2070" class="profile-img">
                 </div>
-                <div style="font-size: 12px; margin-top: 20px; padding: 15px; background: #f4fff4; border-radius: 10px; color: #555;">
-                    <b>Lucky JAE-YEON</b><br>
-                    노래가 즉시 나옵니다!<br>
-                    디자인도 다시 완벽 복구 🍀
+                <div style="font-size: 12px; margin-top: 15px; padding: 12px; background: #f0fff0; border-radius: 8px; color: #555; line-height: 1.6;">
+                    디자인 복구 완료! ✨<br>이제 노란 버튼 없이 <br><b>한 번의 클릭</b>으로 <br>노래가 나옵니다! 🍀
                 </div>
             </aside>
 
             <main class="main-panel">
                 <div class="main-header">
-                    <span style="font-size: 18px; font-weight: 800; color: #4cad3a;">Lucky JAE-YEON World</span>
-                    <button id="music-btn" class="bgm-btn" onclick="startEverything()">▶ MUSIC START</button>
+                    <span style="font-size: 16px; font-weight: 800; color: #4cad3a;">Lucky JAE-YEON World</span>
+                    <button id="music-btn" class="bgm-btn" onclick="toggleMusic()">▶ MUSIC START</button>
                 </div>
                 <div class="content-box">
-                    <h3 style="margin-top:0;">Today's BGM 🎵</h3>
-                    <p style="color: #666; font-size: 14px;">
-                        "완벽한 딱 맞는 상상을 믿는거야"<br><br>
-                        이제 <b>▶ MUSIC START</b> 버튼만 누르면 <br>
-                        다른 확인 창 없이 노래가 바로 시작돼요! <br>
-                        유저님만의 럭키한 공간을 즐겨보세요 Ꮚ˃̶͈ ꈊ ˂̶͈Ꮚ
+                    <h3 style="color: #333;">ILLIT - Lucky Girl Syndrome 🎵</h3>
+                    <p style="font-size: 13px; color: #666; line-height: 1.8;">
+                        레이아웃과 기능을 모두 합쳤어요! <br>
+                        이제 상단의 <b>▶ MUSIC START</b>를 누르면 <br>
+                        번거로운 확인 창 없이 노래가 바로 들릴 거예요. Ꮚ˃̶͈ ꈊ ˂̶͈Ꮚ
                     </p>
                 </div>
-                <nav class="menu-tabs">
-                    <div class="tab active">홈</div>
-                    <div class="tab">사진첩</div>
-                    <div class="tab">방명록</div>
-                </nav>
             </main>
         </div>
     </div>
@@ -97,36 +84,25 @@
     <script>
         let player;
         let isPlaying = false;
-
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
-                height: '360', width: '640', videoId: 'UCmgGZbfjmk',
-                playerVars: { 
-                    'autoplay': 1, 'controls': 0, 'mute': 1, // 초기엔 무조건 뮤트
-                    'enablejsapi': 1, 'origin': window.location.origin 
-                },
-                events: { 'onReady': (e) => e.target.playVideo() }
+                height: '0', width: '0', videoId: 'UCmgGZbfjmk',
+                playerVars: { 'autoplay': 0, 'controls': 0, 'mute': 1 },
+                events: { 'onReady': () => console.log("Player Ready!") }
             });
         }
-
-        // 💡 버튼 하나로 음소거 해제와 재생을 동시에!
-        function startEverything() {
+        function toggleMusic() {
             const btn = document.getElementById('music-btn');
             if (!isPlaying) {
-                player.unMute(); // 음소거 해제
-                player.setVolume(50); // 볼륨 설정
-                player.playVideo(); // 재생 시작
-                btn.innerText = "♪ NOW PLAYING";
-                btn.classList.add('playing');
+                player.unMute(); player.playVideo();
+                btn.innerText = "♪ NOW PLAYING"; btn.classList.add('playing');
                 isPlaying = true;
             } else {
                 player.pauseVideo();
-                btn.innerText = "▶ MUSIC START";
-                btn.classList.remove('playing');
+                btn.innerText = "▶ MUSIC START"; btn.classList.remove('playing');
                 isPlaying = false;
             }
         }
-
         const cloverBox = document.getElementById('clover-box');
         function createClover() {
             const clover = document.createElement('div');
