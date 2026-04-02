@@ -30,38 +30,24 @@
             width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.95);
             border: 2px dashed #fff; border-radius: 15px; display: flex; padding: 25px; box-sizing: border-box;
         }
+        .left-panel { width: 230px; border-right: 1px solid #eee; padding-right: 20px; display: flex; flex-direction: column; align-items: center; }
         
-        /* 왼쪽 영역 디테일 수정 */
-        .left-panel { 
-            width: 230px; 
-            border-right: 1px solid #eee; 
-            padding-right: 20px; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; /* 이미지 중앙 정렬을 위해 추가 */
-        }
-        .today-count { font-size: 11px; text-align: center; margin-bottom: 12px; color: #555; width: 100%; }
+        /* 📸 프로필 박스 (0000.jpg 적용) */
         .profile-box { 
-            width: 100%; height: 190px; 
+            width: 100%; height: 210px; 
             border: 1px solid #ddd; border-radius: 10px; 
-            overflow: hidden; background: #eee;
-            margin-bottom: 15px;
+            overflow: hidden; background: #fff;
         }
-        .profile-img { width: 100%; height: 100%; object-fit: cover; }
+        .profile-img { width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated; }
         
-        /* 📸 새롭게 추가된 주먹밥 이미지 구역 (노란색 표시 부분) */
+        /* 🍙 주먹밥 데코 박스 (14.webp 적용) */
         .decoration-box {
-            width: 100%;
-            height: 100px; /* 유저님이 표시한 노란색 영역 크기에 맞춤 */
-            margin-top: 15px; /* 프사 박스 아래 간격 */
-            display: flex; justify-content: center; align-items: center;
-            border-radius: 8px; /* 스타일 보강 */
-            overflow: hidden; /* 이미지 선명도를 위해 픽셀 렌더링 유지 */
+            width: 100%; height: 80px; 
+            margin-top: 15px; display: flex; justify-content: center; align-items: center;
         }
         .decoration-img {
-            width: 100%; height: 100%;
-            object-fit: contain; /* 이미지가 찌그러지지 않고 박스 안에 쏙 들어가게 함 */
-            image-rendering: pixelated; /* 도트 이미지를 선명하게! */
+            width: 100%; height: 100%; object-fit: contain; 
+            image-rendering: pixelated; /* 도트 선명하게 */
         }
         
         .main-panel { flex: 1; padding-left: 25px; display: flex; flex-direction: column; position: relative; }
@@ -69,7 +55,6 @@
         .bgm-btn {
             background: #fff; border: 1px solid #4cad3a; color: #4cad3a;
             padding: 5px 15px; border-radius: 20px; font-size: 11px; font-weight: bold; cursor: pointer;
-            transition: all 0.3s;
         }
         .bgm-btn.playing { background: #4cad3a; color: #fff; }
         .content-box { flex: 1; background: #fff; border: 1px solid #f2f2f2; border-radius: 12px; padding: 25px; }
@@ -81,7 +66,7 @@
             border-left: none; border-radius: 0 8px 8px 0; font-size: 11px; font-weight: bold;
             display: flex; align-items: center; justify-content: center; color: #555;
         }
-        .tab.active { background: var(--point-green); color: white; border-color: var(--border-dark); }
+        .tab.active { background: var(--point-green); color: white; }
 
         #player { position: absolute; width: 0; height: 0; visibility: hidden; }
     </style>
@@ -93,20 +78,18 @@
     <div class="wrapper">
         <div class="container">
             <aside class="left-panel">
-                <div class="today-count">TODAY <span style="color:red">7</span> | TOTAL 777</div>
+                <div style="font-size: 11px; text-align: center; margin-bottom: 12px; width:100%;">TODAY <span style="color:red">7</span> | TOTAL 777</div>
                 <div class="profile-box">
-                    <img src="https://images.unsplash.com/photo-1528183429752-a97d0bf99b5a?q=80&w=2070" class="profile-img">
-                </div>
+                    <img src="0000.jpg" class="profile-img"> </div>
                 
                 <div class="decoration-box">
-                    <img src="14.png" alt="Decoration" class="decoration-img">
+                    <img src="14.webp" class="decoration-img">
                 </div>
 
-                <div style="font-size: 12px; margin-top: 15px; padding: 15px; background: #f0fff0; border-radius: 8px; color: #555; line-height: 1.6; width: 100%; box-sizing: border-box;">
+                <div style="font-size: 12px; margin-top: 10px; padding: 12px; background: #f0fff0; border-radius: 8px; color: #555; line-height: 1.6; width: 100%; box-sizing: border-box;">
                     <b>Lucky JAE-YEON</b><br>
-                    "완벽한 딱 맞는 상상을 믿는거야"<br><br>
-                    귀여운 도트 주먹밥 🍀<br>
-                    디자인 포인트 완료! ✨
+                    "완벽한 딱 맞는 상상을 믿는거야" 🍀<br><br>
+                    픽셀 감성 미니홈피<br>완성되었습니다! ✨
                 </div>
             </aside>
 
@@ -118,7 +101,7 @@
                 <div class="content-box">
                     <h3 style="color: #333; margin-top: 0;">Welcome Back! Ꮚ˃̶͈ ꈊ ˂̶͈Ꮚ</h3>
                     <p style="font-size: 13px; color: #666; line-height: 1.8;">
-                        레이아웃과 기능이 모두 합쳐졌어요! <br>
+                        레이아웃과 프사가 모두 합쳐졌어요! <br>
                         이제 깃허브에 올리면 전 세계 어디서든 <br>
                         유저님의 예쁜 미니홈피를 볼 수 있습니다. <br><br>
                         상단 <b>▶ MUSIC START</b> 버튼을 눌러보세요!
