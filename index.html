@@ -11,8 +11,6 @@
             background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
             position: relative;
         }
-
-        /* 🍀 클로버 이펙트 */
         .clover-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
         .clover { position: absolute; color: #4cad3a; font-size: 20px; animation: fall linear infinite; opacity: 0; }
         @keyframes fall {
@@ -20,103 +18,48 @@
             10% { opacity: 0.8; }
             100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
-
-        /* 미니홈피 본체 레이아웃 */
         .wrapper {
             z-index: 10; width: 80vw; max-width: 950px; height: 70vh;
             background-color: var(--point-green); border: 2px solid var(--border-dark);
             border-radius: 20px; padding: 15px; position: relative;
-            box-shadow: 10px 10px 0px rgba(0,0,0,0.1);
-            display: flex; justify-content: center; align-items: center;
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.1); display: flex; justify-content: center; align-items: center;
         }
         .container {
             width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.95);
             border: 2px dashed #fff; border-radius: 15px; display: flex; padding: 20px; box-sizing: border-box;
         }
-
-        /* 패널 구분 */
         .left-panel { width: 220px; border-right: 1px solid #eee; padding-right: 15px; display: flex; flex-direction: column; }
         .profile-box { width: 100%; height: 180px; border: 1px solid #ddd; border-radius: 10px; overflow: hidden; background: #eee; }
         .profile-img { width: 100%; height: 100%; object-fit: cover; }
-        
         .main-panel { flex: 1; padding-left: 20px; display: flex; flex-direction: column; position: relative; }
         .main-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #d4edda; padding-bottom: 10px; margin-bottom: 20px; }
-
-        /* BGM 버튼 */
+        
+        /* BGM 버튼 디자인 */
         .bgm-btn {
             background: #fff; border: 1px solid #4cad3a; color: #4cad3a;
             padding: 5px 15px; border-radius: 20px; font-size: 11px; font-weight: bold; cursor: pointer;
+            transition: all 0.3s;
         }
+        .bgm-btn.playing { background: #4cad3a; color: #fff; }
 
         .content-box { flex: 1; background: #fff; border: 1px solid #f2f2f2; border-radius: 12px; padding: 25px; }
-
-        /* 탭 메뉴 */
-        .menu-tabs { position: absolute; right: -62px; top: 70px; display: flex; flex-direction: column; gap: 5px; }
-        .tab-item { width: 60px; height: 40px; background-color: #fff; border: 2px solid var(--border-dark); border-left: none; border-radius: 0 10px 10px 0; text-align: center; line-height: 40px; font-size: 12px; font-weight: bold; text-decoration: none; color: #555; }
-        .active-tab { background-color: var(--point-green); color: #fff; }
-
-        #yt-iframe { position: absolute; width: 1px; height: 1px; opacity: 0; }
+        
+        /* 유튜브 플레이어 숨기기 */
+        #player { position: absolute; width: 0; height: 0; visibility: hidden; }
     </style>
 </head>
 <body>
 
     <div class="clover-container" id="clover-box"></div>
-    <iframe id="yt-iframe" src="https://www.youtube.com/embed/UCmgGZbfjmk?enablejsapi=1&autoplay=1&mute=1"></iframe>
+    
+    <div id="player"></div>
 
     <div class="wrapper">
         <div class="container">
             <aside class="left-panel">
-                <div style="font-size: 11px; text-align: center; margin-bottom: 12px; color: #555;">TODAY <span style="color:red">7</span> | TOTAL 777</div>
+                <div style="font-size: 11px; text-align: center; margin-bottom: 12px;">TODAY <span style="color:red">7</span> | TOTAL 777</div>
                 <div class="profile-box">
-                    <img src="https://images.unsplash.com/photo-1528183429752-a97d0bf99b5a?q=80&w=2070&auto=format&fit=crop" class="profile-img">
+                    <img src="https://images.unsplash.com/photo-1528183429752-a97d0bf99b5a?q=80&w=2070" class="profile-img">
                 </div>
                 <div style="font-size: 12px; margin-top: 15px; padding: 12px; background: #f0fff0; border-radius: 8px; color: #555; line-height: 1.6;">
-                    디자인을 다시 복구했어요! ✨<br>이제 다시 예쁜 클로버가 <br>내릴 거예요. 🍀
-                </div>
-            </aside>
-
-            <main class="main-panel">
-                <div class="main-header">
-                    <span style="font-size: 16px; font-weight: 800; color: #4cad3a;">Lucky JAE-YEON World</span>
-                    <button class="bgm-btn" onclick="playMusic()">▶ MUSIC START</button>
-                </div>
-                <div class="content-box">
-                    <h3 style="color: #333;">Welcome Back! Ꮚ˃̶͈ ꈊ ˂̶͈Ꮚ</h3>
-                    <p style="font-size: 13px; color: #666; line-height: 1.8;">
-                        코드 구조가 잠시 꼬였던 것 같아요. <br>
-                        다시 깔끔한 연두색 미니홈피로 돌려놓았습니다. <br><br>
-                        상단 <b>▶ MUSIC START</b> 버튼을 누르면 <br>
-                        기분 좋은 음악도 다시 흘러나올 거예요!
-                    </p>
-                </div>
-
-                <nav class="menu-tabs">
-                    <a href="#" class="tab-item active-tab">홈</a>
-                    <a href="#" class="tab-item">사진첩</a>
-                    <a href="#" class="tab-item">방명록</a>
-                </nav>
-            </main>
-        </div>
-    </div>
-
-    <script>
-        function playMusic() {
-            const iframe = document.getElementById('yt-iframe').contentWindow;
-            iframe.postMessage('{"event":"command","func":"unMute","args":""}', '*');
-            iframe.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-            document.querySelector('.bgm-btn').innerText = "♪ NOW PLAYING";
-        }
-
-        const cloverBox = document.getElementById('clover-box');
-        function createClover() {
-            const clover = document.createElement('div');
-            clover.className = 'clover'; clover.innerText = '🍀';
-            clover.style.left = Math.random() * 100 + 'vw';
-            clover.style.animationDuration = Math.random() * 3 + 5 + 's';
-            cloverBox.appendChild(clover);
-            setTimeout(() => { clover.remove(); }, 8000);
-        }
-        setInterval(createClover, 500);
-    </script>
-</body>
-</html>
+                    이제 노란 버튼 없이 <br><b>한 번의 클릭</b>
