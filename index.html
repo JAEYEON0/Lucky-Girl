@@ -11,7 +11,7 @@
             background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
             position: relative;
         }
-        /* 🍀 클로버 효과 */
+        /* 🍀 클로버 애니메이션 */
         .clover-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
         .clover { position: absolute; color: #4cad3a; font-size: 20px; animation: fall linear infinite; opacity: 0; }
         @keyframes fall {
@@ -19,7 +19,6 @@
             10% { opacity: 0.8; }
             100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
-        /* 미니홈피 전체 틀 */
         .wrapper {
             z-index: 10; width: 85vw; max-width: 950px; height: 75vh;
             background-color: var(--point-green); border: 2px solid var(--border-dark);
@@ -30,89 +29,56 @@
             width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.95);
             border: 2px dashed #fff; border-radius: 15px; display: flex; padding: 25px; box-sizing: border-box;
         }
+        .left-panel { width: 230px; border-right: 1px solid #eee; padding-right: 20px; display: flex; flex-direction: column; align-items: center; }
         
-        /* 왼쪽 패널 세부 조정 */
-        .left-panel { width: 230px; border-right: 1px solid #eee; padding-right: 20px; display: flex; flex-direction: column; }
-        .today-count { font-size: 11px; text-align: center; margin-bottom: 12px; color: #555; width: 100%; }
-        .profile-box { 
-            width: 100%; height: 190px; 
-            border: 1px solid #ddd; border-radius: 10px; 
-            overflow: hidden; background: #eee;
-            margin-bottom: 15px;
-        }
-        .profile-img { width: 100%; height: 100%; object-fit: cover; }
+        /* 🖼️ 프로필 (0000.jpg) */
+        .profile-box { width: 100%; height: 210px; border: 1px solid #ddd; border-radius: 10px; overflow: hidden; background: #fff; }
+        .profile-img { width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated; }
         
-        /* 📸 새롭게 추가된 행운 부적 구역 (빨간색 표시 부분) */
-        .luck-box {
-            width: 100%;
-            height: 120px; /* 유저님이 표시한 빨간색 영역 크기에 맞춤 */
-            margin-top: 20px; /* 미니홈피 스타일 박스 아래 간격 */
-            display: flex; justify-content: center; align-items: center;
-            border-radius: 8px; /* 스타일 보강 */
-            overflow: hidden;
-        }
-        .luck-img {
-            width: 100%; height: 100%;
-            object-fit: contain; /* 이미지가 찌그러지지 않고 박스 안에 쏙 들어가게 함 */
-        }
+        /* 🍙 주먹밥 (14.webp) */
+        .decoration-box { width: 100%; height: 60px; margin-top: 10px; display: flex; justify-content: center; align-items: center; }
+        .decoration-img { width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; }
+
+        /* 🧧 행운부적 (7890.jpg) */
+        .luck-box { width: 100%; height: 110px; margin-top: 15px; display: flex; justify-content: center; align-items: center; border-radius: 8px; overflow: hidden; }
+        .luck-img { width: 100%; height: 100%; object-fit: contain; }
         
         .main-panel { flex: 1; padding-left: 25px; display: flex; flex-direction: column; position: relative; }
         .main-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #d4edda; padding-bottom: 12px; margin-bottom: 20px; }
-        .bgm-btn {
-            background: #fff; border: 1px solid #4cad3a; color: #4cad3a;
-            padding: 5px 15px; border-radius: 20px; font-size: 11px; font-weight: bold; cursor: pointer;
-            transition: all 0.3s;
-        }
-        .bgm-btn.playing { background: #4cad3a; color: #fff; }
+        .bgm-btn { background: #fff; border: 1px solid #4cad3a; color: #4cad3a; padding: 5px 15px; border-radius: 20px; font-size: 11px; font-weight: bold; cursor: pointer; }
         .content-box { flex: 1; background: #fff; border: 1px solid #f2f2f2; border-radius: 12px; padding: 25px; }
-        
-        /* 🏠 사이드 탭 */
         .menu-tabs { position: absolute; right: -67px; top: 50px; display: flex; flex-direction: column; gap: 5px; }
-        .tab { 
-            width: 65px; height: 35px; background: white; border: 2px solid var(--border-dark); 
-            border-left: none; border-radius: 0 8px 8px 0; font-size: 11px; font-weight: bold;
-            display: flex; align-items: center; justify-content: center; color: #555;
-        }
-        .tab.active { background: var(--point-green); color: white; border-color: var(--border-dark); }
-
-        #player { position: absolute; width: 0; height: 0; visibility: hidden; }
+        .tab { width: 65px; height: 35px; background: white; border: 2px solid var(--border-dark); border-left: none; border-radius: 0 8px 8px 0; font-size: 11px; font-weight: bold; display: flex; align-items: center; justify-content: center; }
+        .tab.active { background: var(--point-green); color: white; }
     </style>
 </head>
 <body>
     <div class="clover-container" id="clover-box"></div>
-    <div id="player"></div>
-
     <div class="wrapper">
         <div class="container">
             <aside class="left-panel">
-                <div class="today-count">TODAY <span style="color:red">7</span> | TOTAL 777</div>
+                <div style="font-size: 11px; margin-bottom: 12px;">TODAY <span style="color:red">7</span> | TOTAL 777</div>
                 <div class="profile-box">
-                    <img src="https://images.unsplash.com/photo-1528183429752-a97d0bf99b5a?q=80&w=2070" class="profile-img">
-                </div>
-                
-                <div style="font-size: 12px; margin-top: 15px; padding: 15px; background: #f0fff0; border-radius: 8px; color: #555; line-height: 1.6; width: 100%; box-sizing: border-box;">
+                    <img src="0000.jpg" class="profile-img"> </div>
+                <div class="decoration-box">
+                    <img src="14.webp" class="decoration-img"> </div>
+                <div style="font-size: 12px; margin-top: 10px; padding: 10px; background: #f0fff0; border-radius: 8px; color: #555; line-height: 1.4; width: 100%; box-sizing: border-box;">
                     <b>Lucky JAE-YEON</b><br>
-                    "완벽한 딱 맞는 상상을 믿는거야"<br><br>
-                    픽셀 감성 미니홈피<br>배포 준비 완료! ✨
+                    "완벽한 딱 맞는 상상을 믿는거야" 🍀
                 </div>
-
                 <div class="luck-box">
-                    <img src="7890.jpg" alt="Lucky Charm" class="luck-img">
-                </div>
+                    <img src="7890.jpg" class="luck-img"> </div>
             </aside>
-
             <main class="main-panel">
                 <div class="main-header">
                     <span style="font-size: 16px; font-weight: 800; color: #4cad3a;">Lucky JAE-YEON World</span>
-                    <button id="music-btn" class="bgm-btn" onclick="toggleMusic()">▶ MUSIC START</button>
+                    <button class="bgm-btn">▶ MUSIC START</button>
                 </div>
                 <div class="content-box">
-                    <h3 style="color: #333; margin-top: 0;">Welcome Back! Ꮚ˃̶͈ ꈊ ˂̶͈Ꮚ</h3>
+                    <h3 style="margin-top: 0;">Welcome Back! Ꮚ˃̶͈ ꈊ ˂̶͈Ꮚ</h3>
                     <p style="font-size: 13px; color: #666; line-height: 1.8;">
-                        레이아웃과 기능이 모두 합쳐졌어요! <br>
-                        이제 깃허브에 올리면 전 세계 어디서든 <br>
-                        유저님의 예쁜 미니홈피를 볼 수 있습니다. <br><br>
-                        상단 <b>▶ MUSIC START</b> 버튼을 눌러보세요!
+                        이미지 경로를 모두 수정했습니다! <br>
+                        파일들을 한 폴더에 모아주시면 다시 귀엽게 보일 거예요.
                     </p>
                 </div>
                 <nav class="menu-tabs">
@@ -123,30 +89,7 @@
             </main>
         </div>
     </div>
-
-    <script src="https://www.youtube.com/iframe_api"></script>
     <script>
-        let player;
-        let isPlaying = false;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                height: '0', width: '0', videoId: 'UCmgGZbfjmk',
-                playerVars: { 'autoplay': 0, 'controls': 0, 'mute': 1 },
-                events: { 'onReady': () => console.log("Ready!") }
-            });
-        }
-        function toggleMusic() {
-            const btn = document.getElementById('music-btn');
-            if (!isPlaying) {
-                player.unMute(); player.playVideo();
-                btn.innerText = "♪ NOW PLAYING"; btn.classList.add('playing');
-                isPlaying = true;
-            } else {
-                player.pauseVideo();
-                btn.innerText = "▶ MUSIC START"; btn.classList.remove('playing');
-                isPlaying = false;
-            }
-        }
         const cloverBox = document.getElementById('clover-box');
         function createClover() {
             const clover = document.createElement('div');
