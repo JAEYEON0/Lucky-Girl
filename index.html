@@ -6,19 +6,44 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/neodunggeunmo@1.0.1/neodunggeunmo.css">
     <style>
         :root { --point-green: #9de47c; --border-dark: #555; }
-        body { 
-            margin: 0; height: 100vh; display: flex; justify-content: center; align-items: center; 
-            font-family: 'NeoDunggeunmo', sans-serif; 
-            overflow: hidden; background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); position: relative; 
-        }
+        body { margin: 0; height: 100vh; display: flex; justify-content: center; align-items: center; font-family: 'NeoDunggeunmo', sans-serif; overflow: hidden; position: relative; }
         
-        /* 🍀 클로버 배경 애니메이션 */
-        .clover-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
-        .clover { position: absolute; color: #4cad3a; font-size: 20px; animation: fall linear infinite; opacity: 0; }
-        @keyframes fall { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; } 10% { opacity: 0.8; } 100% { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
+        /* ✨ [NEW] 풍성한 클로버 패턴 & 빛구슬 배경 */
+        .lucky-background {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            /* 1. 미니홈피 그라데이션 */
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            overflow: hidden;
+        }
+        /* 2. 클로버 투명 패턴 overlay */
+        .lucky-background::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><text y="40" font-size="30" opacity="0.1">🍀</text></svg>');
+            background-repeat: repeat;
+        }
+        /* 3. 행운의 반짝이는 빛구슬 효과 (JavaScript로 생성) */
+        .sparkle {
+            position: absolute; width: 5px; height: 5px; background-color: #fff; border-radius: 50%; opacity: 0.7;
+            box-shadow: 0 0 10px #fff; animation: sparkleFall linear infinite;
+        }
+        @keyframes sparkleFall {
+            0% { transform: translateY(-10vh) scale(1); opacity: 0; }
+            50% { opacity: 0.7; }
+            100% { transform: translateY(110vh) scale(0.5); opacity: 0; }
+        }
 
-        .wrapper { z-index: 10; width: 85vw; max-width: 950px; height: 75vh; background-color: var(--point-green); border: 2px solid var(--border-dark); border-radius: 20px; padding: 15px; position: relative; box-shadow: 10px 10px 0px rgba(0,0,0,0.1); display: flex; justify-content: center; align-items: center; }
-        .container { width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.95); border: 2px dashed #fff; border-radius: 15px; display: flex; padding: 25px; box-sizing: border-box; }
+        /* 🍀 떨어지는 클로버 애니메이션 (이전 유지) */
+        .clover-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+        .falling-clover { position: absolute; color: #4cad3a; font-size: 20px; animation: fall linear infinite; opacity: 0; }
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* 미니홈피 구성요소 (이전 유지) */
+        .wrapper { z-index: 10; width: 85vw; max-width: 950px; height: 75vh; background-color: rgba(157, 228, 124, 0.9); border: 2px solid var(--border-dark); border-radius: 20px; padding: 15px; position: relative; box-shadow: 10px 10px 20px rgba(0,0,0,0.15); display: flex; justify-content: center; align-items: center; }
+        .container { width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.98); border: 2px dashed #fff; border-radius: 15px; display: flex; padding: 25px; box-sizing: border-box; }
         
         /* 왼쪽 패널 */
         .left-panel { width: 230px; border-right: 1px solid #eee; padding-right: 20px; display: flex; flex-direction: column; align-items: center; }
@@ -66,8 +91,10 @@
     </style>
 </head>
 <body>
+    <div class="lucky-background" id="lucky-bg"></div>
     <div class="clover-container" id="clover-box"></div>
     <div id="player"></div>
+
     <div class="wrapper">
         <div class="container">
             <aside class="left-panel">
@@ -101,7 +128,7 @@
                         </div>
                         <div class="home-widget">
                             <div class="widget-title">📢 Mini Log</div>
-                            <div style="font-size:13px; color:#777;">통합 최종 업데이트 완료! 🍀</div>
+                            <div style="font-size:13px; color:#777;">풍성한 클로버 배경 업데이트 완료! 🍀</div>
                         </div>
 
                         <div class="home-widget gallery-widget">
@@ -153,6 +180,23 @@
 
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
+        // ✨ [NEW] 행운의 빛구슬(Sparkle) 생성 및 애니메이션
+        function createSparkles() {
+            const bg = document.getElementById('lucky-bg');
+            const sparkleCount = 30; // 반짝임 개수
+
+            for (let i = 0; i < sparkleCount; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = Math.random() * 100 + 'vw';
+                sparkle.style.top = Math.random() * 100 + 'vh';
+                sparkle.style.animationDelay = Math.random() * 5 + 's';
+                sparkle.style.animationDuration = Math.random() * 5 + 5 + 's'; // 5~10초 사이로 반짝이며 떨어짐
+                bg.appendChild(sparkle);
+            }
+        }
+        createSparkles(); // 배경 생성 시 호출
+
         function showTab(tabName) {
             document.getElementById('home-content').classList.remove('active');
             document.getElementById('guest-content').classList.remove('active');
@@ -169,14 +213,16 @@
             if (!isPlaying) { player.unMute(); player.playVideo(); btn.innerText = "STOP"; btn.classList.add('playing'); display.style.display = "flex"; isPlaying = true; }
             else { player.pauseVideo(); btn.innerText = "▶ MUSIC START"; btn.classList.remove('playing'); display.style.display = "none"; isPlaying = false; }
         }
+        
+        // 떨어지는 클로버 생성 (기존 유지)
         setInterval(() => {
             const clover = document.createElement('div');
-            clover.className = 'clover'; clover.innerText = '🍀';
+            clover.className = 'falling-clover'; clover.innerText = '🍀';
             clover.style.left = Math.random() * 100 + 'vw';
             clover.style.animationDuration = Math.random() * 3 + 5 + 's';
             document.getElementById('clover-box').appendChild(clover);
             setTimeout(() => clover.remove(), 8000);
-        }, 500);
+        }, 800); // 생성 간격을 살짝 늘려 빛구슬과 어우러지게 함
     </script>
 </body>
 </html>
