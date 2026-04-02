@@ -11,6 +11,7 @@
             background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
             position: relative;
         }
+        /* 🍀 클로버 효과 */
         .clover-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
         .clover { position: absolute; color: #4cad3a; font-size: 20px; animation: fall linear infinite; opacity: 0; }
         @keyframes fall {
@@ -18,6 +19,7 @@
             10% { opacity: 0.8; }
             100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
+        /* 미니홈피 전체 틀 */
         .wrapper {
             z-index: 10; width: 80vw; max-width: 950px; height: 70vh;
             background-color: var(--point-green); border: 2px solid var(--border-dark);
@@ -41,17 +43,12 @@
             transition: all 0.3s;
         }
         .bgm-btn.playing { background: #4cad3a; color: #fff; }
-
         .content-box { flex: 1; background: #fff; border: 1px solid #f2f2f2; border-radius: 12px; padding: 25px; }
-        
-        /* 유튜브 플레이어 숨기기 */
         #player { position: absolute; width: 0; height: 0; visibility: hidden; }
     </style>
 </head>
 <body>
-
     <div class="clover-container" id="clover-box"></div>
-    
     <div id="player"></div>
 
     <div class="wrapper">
@@ -62,4 +59,60 @@
                     <img src="https://images.unsplash.com/photo-1528183429752-a97d0bf99b5a?q=80&w=2070" class="profile-img">
                 </div>
                 <div style="font-size: 12px; margin-top: 15px; padding: 12px; background: #f0fff0; border-radius: 8px; color: #555; line-height: 1.6;">
-                    이제 노란 버튼 없이 <br><b>한 번의 클릭</b>
+                    디자인 복구 완료! ✨<br>이제 노란 버튼 없이 <br><b>한 번의 클릭</b>으로 <br>노래가 나옵니다! 🍀
+                </div>
+            </aside>
+
+            <main class="main-panel">
+                <div class="main-header">
+                    <span style="font-size: 16px; font-weight: 800; color: #4cad3a;">Lucky JAE-YEON World</span>
+                    <button id="music-btn" class="bgm-btn" onclick="toggleMusic()">▶ MUSIC START</button>
+                </div>
+                <div class="content-box">
+                    <h3 style="color: #333;">ILLIT - Lucky Girl Syndrome 🎵</h3>
+                    <p style="font-size: 13px; color: #666; line-height: 1.8;">
+                        레이아웃과 기능을 모두 합쳤어요! <br>
+                        이제 상단의 <b>▶ MUSIC START</b>를 누르면 <br>
+                        번거로운 확인 창 없이 노래가 바로 들릴 거예요. Ꮚ˃̶͈ ꈊ ˂̶͈Ꮚ
+                    </p>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        let player;
+        let isPlaying = false;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '0', width: '0', videoId: 'UCmgGZbfjmk',
+                playerVars: { 'autoplay': 0, 'controls': 0, 'mute': 1 },
+                events: { 'onReady': () => console.log("Player Ready!") }
+            });
+        }
+        function toggleMusic() {
+            const btn = document.getElementById('music-btn');
+            if (!isPlaying) {
+                player.unMute(); player.playVideo();
+                btn.innerText = "♪ NOW PLAYING"; btn.classList.add('playing');
+                isPlaying = true;
+            } else {
+                player.pauseVideo();
+                btn.innerText = "▶ MUSIC START"; btn.classList.remove('playing');
+                isPlaying = false;
+            }
+        }
+        const cloverBox = document.getElementById('clover-box');
+        function createClover() {
+            const clover = document.createElement('div');
+            clover.className = 'clover'; clover.innerText = '🍀';
+            clover.style.left = Math.random() * 100 + 'vw';
+            clover.style.animationDuration = Math.random() * 3 + 5 + 's';
+            cloverBox.appendChild(clover);
+            setTimeout(() => { clover.remove(); }, 8000);
+        }
+        setInterval(createClover, 500);
+    </script>
+</body>
+</html>
